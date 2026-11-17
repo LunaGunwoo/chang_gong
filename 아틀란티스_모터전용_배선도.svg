@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1280" viewBox="0 0 1700 1280" role="img" aria-labelledby="title desc">
+  <title id="title">아틀란티스 · DC 모터 전용 배선도</title>
+  <desc id="desc">서보와 IMU를 제외한 DRV8833 A채널 연결도. ESP32 GPIO33은 STBY, GPIO25는 AIN1, GPIO26은 AIN2, GND는 공통 GND 레일로 연결한다. 드라이버 VM과 GND는 전원 모듈의 5V 출력과 GND에 직접 연결한다. 미사용 BIN1과 BIN2는 공통 GND에 연결하고 AO1과 AO2는 모터로 연결한다. 단자 위치는 개념 배치이며 실물 핀 순서를 나타내지 않는다.</desc>
+  <metadata>Source: 아틀란티스_보트_점퍼선배선도.svg. Firmware: motor_serial/motor_serial.ino and motor_ping/motor_ping.ino. Wire IDs preserve the original drawing. DRV.STBY is assumed to expose DRV8833 nSLEEP. Breadboard rail points are electrically common only when the physical rail is continuous.</metadata>
+  <defs>
+    <style>
+      text { font-family: 'Malgun Gothic', 'Noto Sans KR', sans-serif; fill: #20394e; }
+      .title { font-size: 36px; font-weight: 700; }
+      .heading { font-size: 27px; font-weight: 700; }
+      .label { font-size: 23px; font-weight: 700; }
+      .body { font-size: 21px; }
+      .small { font-size: 18px; }
+      .muted { fill: #536c80; }
+      .light { fill: #f7fbff; }
+      .wire { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .gnd { stroke: #354351; }
+      .power { stroke: #d43748; }
+      .tag { fill: white; stroke: #cad7e1; stroke-width: 1.5; rx: 6; }
+      .tagtext { font-size: 18px; font-weight: 700; text-anchor: middle; }
+      .pin { fill: #f6ca67; stroke: #947437; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1700" height="1280" fill="#eef3f7"/>
+  <text x="50" y="65" class="title">ATLANTIS · DC 모터만 연결하기</text>
+  <text x="52" y="105" class="body muted">ESP32 점퍼선 4개 + USB 전원 · 서보 / IMU 제외 · 기존 도면의 전선 번호 유지</text>
+  <rect x="50" y="125" width="1600" height="43" rx="10" fill="#fff1d8"/>
+  <text x="70" y="154" class="body" style="fill:#8d5300">단자 이름을 따라 연결하세요. 아래 단자 위치는 연결 관계용이며, 실물 핀 순서는 모듈 인쇄 글씨로 확인합니다.</text>
+
+  <!-- Components: every external wire ends at one labeled terminal. -->
+  <rect x="60" y="230" width="280" height="420" rx="20" fill="#214f60"/>
+  <text x="85" y="275" class="heading light">ESP32</text>
+  <text x="85" y="302" class="small light">WROOM / DevKit</text>
+  <text x="310" y="338" text-anchor="end" class="label light">GPIO 33</text>
+  <text x="310" y="398" text-anchor="end" class="label light">GPIO 25</text>
+  <text x="310" y="458" text-anchor="end" class="label light">GPIO 26</text>
+  <text x="310" y="578" text-anchor="end" class="label light">GND</text>
+  <text x="85" y="620" class="body" style="fill:#ffd1d6">5V / 3V3 핀 비움</text>
+  <rect x="143" y="637" width="54" height="26" rx="5" fill="#c8d4dd" stroke="#607785" stroke-width="2"/>
+
+  <rect x="680" y="200" width="360" height="450" rx="20" fill="#284c65"/>
+  <text x="708" y="245" class="heading light">DRV8833</text>
+  <text x="708" y="275" class="body light">A채널 · 제어 / 전원</text>
+  <text x="704" y="338" class="label light">STBY (nSLEEP)</text>
+  <text x="704" y="398" class="label light">AIN1</text>
+  <text x="704" y="458" class="label light">AIN2</text>
+  <text x="704" y="518" class="label light">BIN1</text>
+  <text x="704" y="578" class="label light">BIN2</text>
+  <text x="1015" y="258" text-anchor="end" class="label" style="fill:#ffb7be">VM</text>
+  <text x="1015" y="318" text-anchor="end" class="label light">GND</text>
+  <text x="1015" y="458" text-anchor="end" class="label light">AO1</text>
+  <text x="1015" y="518" text-anchor="end" class="label light">AO2</text>
+  <text x="705" y="625" class="small" style="fill:#d0dee8">BO1·BO2·NC는 비워 둠</text>
+
+  <rect x="1210" y="180" width="400" height="200" rx="18" fill="#fff7ec" stroke="#d9b675" stroke-width="2"/>
+  <text x="1235" y="216" class="heading">전원 모듈 · 5V 출력</text>
+  <text x="1235" y="258" class="label" style="fill:#c42f40">출력 1 · 5V</text>
+  <text x="1235" y="318" class="label">출력 1 · GND</text>
+  <text x="1580" y="356" text-anchor="end" class="body">출력 3 · GND ↓</text>
+  <text x="1235" y="356" class="small muted">공통 GND 모듈</text>
+
+  <rect x="1210" y="420" width="330" height="240" rx="18" fill="#fff" stroke="#c5d2dd" stroke-width="2"/>
+  <text x="1226" y="456" class="small">선 1</text>
+  <text x="1226" y="516" class="small">선 2</text>
+  <circle cx="1380" cy="500" r="56" fill="#dde7ee" stroke="#748b9c" stroke-width="3"/>
+  <text x="1380" y="509" text-anchor="middle" class="heading">DC</text>
+  <text x="1235" y="590" class="label">5V DC 모터</text>
+  <text x="1235" y="628" class="body" style="fill:#ba3042">프로펠러 제거 후 시험</text>
+
+  <rect x="420" y="740" width="700" height="185" rx="18" fill="#fff" stroke="#c5d2dd" stroke-width="2"/>
+  <text x="445" y="865" class="heading">빵판 GND 레일 하나만 사용</text>
+  <path d="M450 790 H1090" stroke="#354351" stroke-width="12" stroke-linecap="round"/>
+  <text x="480" y="825" text-anchor="middle" class="small">G1</text>
+  <text x="660" y="825" text-anchor="middle" class="small">G2</text>
+  <text x="840" y="825" text-anchor="middle" class="small">G16</text>
+  <text x="1020" y="825" text-anchor="middle" class="small">G17</text>
+  <text x="445" y="900" class="small muted">같은 레일인지 도통 확인 · 빵판에 5V 공급 금지</text>
+
+  <rect x="60" y="850" width="260" height="90" rx="15" fill="#e4eef8" stroke="#aac3dc" stroke-width="2"/>
+  <text x="82" y="885" class="label">PC USB</text>
+  <text x="82" y="916" class="small">ESP32 전원 + 시리얼</text>
+
+  <!-- The 11 point-to-point wires match the original complete boat drawing. -->
+  <g id="W12" data-net="STBY" data-from="ESP.GPIO33" data-to="DRV.STBY"><title>W12: GPIO 33 → STBY</title><path class="wire" stroke="#8754bc" d="M340 330 H680"/></g>
+  <g id="W10" data-net="AIN1" data-from="ESP.GPIO25" data-to="DRV.AIN1"><title>W10: GPIO 25 → AIN1</title><path class="wire" stroke="#087f70" d="M340 390 H680"/></g>
+  <g id="W11" data-net="AIN2" data-from="ESP.GPIO26" data-to="DRV.AIN2"><title>W11: GPIO 26 → AIN2</title><path class="wire" stroke="#087cba" d="M340 450 H680"/></g>
+  <g id="W06" data-net="GND" data-from="ESP.GND" data-to="RAIL.GND.1"><title>W06: ESP32 GND → G2</title><path class="wire gnd" d="M340 570 H380 V700 H660 V790"/></g>
+  <g id="W01" data-net="5V" data-from="POWER.5V_1" data-to="DRV.VM"><title>W01: 전원 5V → VM</title><path class="wire power" d="M1210 250 H1040"/></g>
+  <g id="W02" data-net="GND" data-from="POWER.5V_GND_1" data-to="DRV.GND"><title>W02: 전원 GND → 드라이버 GND 직접 연결</title><path class="wire gnd" d="M1210 310 H1040"/></g>
+  <g id="W14" data-net="M1" data-from="DRV.AO1" data-to="MOTOR.1"><title>W14: AO1 → 모터 선 1</title><path class="wire" stroke="#bb6906" d="M1040 450 H1210"/></g>
+  <g id="W15" data-net="M2" data-from="DRV.AO2" data-to="MOTOR.2"><title>W15: AO2 → 모터 선 2</title><path class="wire" stroke="#bb6906" d="M1040 510 H1210"/></g>
+  <g id="W16" data-net="GND" data-from="DRV.BIN1" data-to="RAIL.GND.15"><title>W16: BIN1 → G16</title><path class="wire gnd" d="M680 510 H560 V690 H840 V790"/></g>
+  <g id="W17" data-net="GND" data-from="DRV.BIN2" data-to="RAIL.GND.16"><title>W17: BIN2 → G17</title><path class="wire gnd" d="M680 570 H620 V670 H1020 V790"/></g>
+  <g id="W05" data-net="GND" data-from="POWER.5V_GND_3" data-to="RAIL.GND.0"><title>W05: 전원 출력 3 GND → G1</title><path class="wire gnd" d="M1580 380 V950 H430 V790 H480"/></g>
+  <g id="C01" data-net="USB" data-from="PC.USB" data-to="ESP.USB"><title>C01: PC USB → ESP32 USB 전원 및 시리얼 케이블</title><path fill="none" stroke="#526b9c" stroke-width="10" stroke-linecap="round" d="M170 850 V663"/></g>
+
+  <!-- Terminal dots; the breadboard's ground bar is the only drawn junction. -->
+  <g class="pin">
+    <circle cx="340" cy="330" r="6"/><circle cx="340" cy="390" r="6"/><circle cx="340" cy="450" r="6"/><circle cx="340" cy="570" r="6"/>
+    <circle cx="680" cy="330" r="6"/><circle cx="680" cy="390" r="6"/><circle cx="680" cy="450" r="6"/><circle cx="680" cy="510" r="6"/><circle cx="680" cy="570" r="6"/>
+    <circle cx="1040" cy="250" r="6"/><circle cx="1040" cy="310" r="6"/><circle cx="1040" cy="450" r="6"/><circle cx="1040" cy="510" r="6"/>
+    <circle cx="1210" cy="250" r="6"/><circle cx="1210" cy="310" r="6"/><circle cx="1580" cy="380" r="6"/>
+    <circle cx="1210" cy="450" r="6"/><circle cx="1210" cy="510" r="6"/>
+    <circle cx="480" cy="790" r="7"/><circle cx="660" cy="790" r="7"/><circle cx="840" cy="790" r="7"/><circle cx="1020" cy="790" r="7"/>
+  </g>
+
+  <!-- Wire labels occupy open space, away from component pin labels. -->
+  <g><rect class="tag" x="465" y="314" width="76" height="32"/><text class="tagtext" x="503" y="337" style="fill:#8754bc">W12</text></g>
+  <g><rect class="tag" x="465" y="374" width="76" height="32"/><text class="tagtext" x="503" y="397" style="fill:#087f70">W10</text></g>
+  <g><rect class="tag" x="465" y="434" width="76" height="32"/><text class="tagtext" x="503" y="457" style="fill:#087cba">W11</text></g>
+  <g><rect class="tag" x="342" y="607" width="76" height="32"/><text class="tagtext" x="380" y="630">W06</text></g>
+  <g><rect class="tag" x="1080" y="234" width="76" height="32"/><text class="tagtext" x="1118" y="257" style="fill:#c42f40">W01</text></g>
+  <g><rect class="tag" x="1080" y="294" width="76" height="32"/><text class="tagtext" x="1118" y="317">W02</text></g>
+  <g><rect class="tag" x="1080" y="434" width="76" height="32"/><text class="tagtext" x="1118" y="457" style="fill:#bb6906">W14</text></g>
+  <g><rect class="tag" x="1080" y="494" width="76" height="32"/><text class="tagtext" x="1118" y="517" style="fill:#bb6906">W15</text></g>
+  <g><rect class="tag" x="522" y="580" width="76" height="32"/><text class="tagtext" x="560" y="603">W16</text></g>
+  <g><rect class="tag" x="582" y="620" width="76" height="32"/><text class="tagtext" x="620" y="643">W17</text></g>
+  <g><rect class="tag" x="1370" y="934" width="76" height="32"/><text class="tagtext" x="1408" y="957">W05</text></g>
+  <g><rect class="tag" x="132" y="748" width="76" height="32"/><text class="tagtext" x="170" y="771" style="fill:#526b9c">C01</text></g>
+  <text x="1160" y="850" class="small muted">전원 모듈 GND 단자를 각각 사용</text>
+  <text x="1160" y="880" class="small muted">한 구멍에 두 선을 넣지 않음</text>
+  <text x="1160" y="910" class="small muted">출력 1·3의 GND는 모듈 내부 공통</text>
+  <text x="445" y="980" class="small muted">G1·G2·G16·G17은 원본 도면의 GND 레일 위치 번호입니다.</text>
+
+  <rect x="50" y="1000" width="780" height="225" rx="18" fill="#fff" stroke="#c5d2dd" stroke-width="2"/>
+  <text x="75" y="1040" class="heading">연결 전 확인</text>
+  <text x="75" y="1080" class="body">① 전원 OFF · 모터 프로펠러 제거</text>
+  <text x="75" y="1117" class="body">② VM에는 모터용 5V · ESP32에는 USB 전원</text>
+  <text x="75" y="1154" class="body">③ G1·G2·G16·G17 도통 확인 (레일이 끊겨 있으면 연결 보강)</text>
+  <text x="75" y="1191" class="body">④ 모터 정격전압·시동전류가 전원 / 드라이버 허용 범위인지 확인</text>
+
+  <rect x="860" y="1000" width="790" height="225" rx="18" fill="#e8f4ed" stroke="#a6cdb6" stroke-width="2"/>
+  <text x="885" y="1040" class="heading">현재 USB 테스트 코드와 대응</text>
+  <text x="885" y="1080" class="body">r : STBY=HIGH → AIN1 PWM 30% → 60% → STBY=LOW</text>
+  <text x="885" y="1117" class="body">AIN2=LOW 유지 · s : 출력 차단 · BIN1 / BIN2=GND</text>
+  <text x="885" y="1154" class="body">배선도는 연결 관계와 제어 논리를 검사한 자료입니다.</text>
+  <text x="885" y="1191" class="body">실제 꽂힌 선 · 전원 전압 · 모터 회전은 실물에서 확인합니다.</text>
+  <a href="https://www.ti.com/lit/ds/symlink/drv8833.pdf"><text x="50" y="1260" class="small muted">제어 기준: TI DRV8833 데이터시트 · STBY는 모듈의 nSLEEP 연결을 전제로 함</text></a>
+</svg>

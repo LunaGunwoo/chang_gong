@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2080" height="2160" viewBox="0 0 2080 2160" role="img" aria-labelledby="title desc">
+<title id="title">DRV8833 단독 고장 진단 · 측정기 없이 단계별 비교</title>
+<desc id="desc">ESP32와 빵판을 분리한 뒤 정격 5V 브러시 DC 모터와 전원 모듈의 5V 출력으로 직접 구동, 정지, A채널, B채널을 비교하는 진단 배선도. 배선을 바꿀 때마다 전원을 끄고 1초 이내 시험한다. 모터가 돌지 않는 것만으로 드라이버 고장을 확정할 수 없다.</desc>
+<metadata>Assumptions: actual DRV8833 module with onboard support components, STBY wired to nSLEEP, common ground between all power-module output terminals, regulated 5V outputs, a 5V brushed DC motor within supply and driver current limits. Red connections are 5V logic as well as VM; disconnect all ESP32 wires before this standalone test.</metadata>
+<style>text {font-family:'Malgun Gothic','Noto Sans KR',sans-serif;} </style>
+<rect width="2080" height="2160" fill="#eef3f7"/>
+<text x="45" y="62" font-size="40" fill="#20394e" font-weight="700">DRV8833 &#183; 처음부터 다시 하는 단독 고장 진단</text>
+<text x="47" y="105" font-size="24" fill="#536c80" font-weight="400">측정기 없이 전원&#183;모터&#183;A/B채널을 비교합니다. 네 그림은 동시에 연결하는 배선이 아닙니다.</text>
+<rect x="40" y="130" width="2000" height="125" rx="16" fill="#fff1df" stroke="#e0bd84" stroke-width="2"/>
+<text x="65" y="167" font-size="24" fill="#8b4b00" font-weight="700">준비: 전원 OFF → ESP32&#183;USB&#183;빵판&#183;서보&#183;IMU 연결을 모두 제거 → 프로펠러 제거 / 모터 고정</text>
+<text x="65" y="204" font-size="23" fill="#8b4b00" font-weight="400">배선을 바꿀 때마다 전원 OFF. 각 구동 시험은 1초 이내 켰다가 OFF. 안 돌거나 뜨거우면 즉시 OFF.</text>
+<text x="65" y="238" font-size="22" fill="#8b4b00" font-weight="400">정격 5V 브러시 DC 모터 + 전원 모듈의 5V 출력만 사용합니다. 18650 배터리 단자에 직접 연결하지 않습니다.</text>
+<text x="50" y="277" font-size="18" fill="#536c80" font-weight="400">색상: 빨강 = 5V / 검정 = GND / 주황 = 모터 출력선 (2단계에서는 Hi-Z, 전압을 공급하지 않음)</text>
+<g id="direct" transform="translate(40 285)">
+<rect x="0" y="0" width="980" height="610" rx="16" fill="#fff" stroke="#c5d2dd" stroke-width="2"/>
+<text x="25" y="45" font-size="28" fill="#20394e" font-weight="700">1  전원 + 모터만 먼저 확인</text>
+<text x="25" y="85" font-size="20" fill="#536c80" font-weight="400">드라이버를 완전히 빼고, 같은 모터와 같은 전원으로 시험합니다.</text>
+<rect x="30" y="150" width="270" height="300" rx="16" fill="#fff7ec" stroke="#d9b675" stroke-width="2"/>
+<text x="50" y="190" font-size="27" fill="#20394e" font-weight="700">전원 모듈</text>
+<text x="50" y="244" font-size="23" fill="#c42f40" font-weight="700">출력 1 &#183; 5V</text>
+<text x="50" y="364" font-size="23" fill="#20394e" font-weight="700">출력 1 &#183; GND</text>
+<rect x="680" y="180" width="250" height="240" rx="16" fill="#e7edf2" stroke="#c5d2dd" stroke-width="2"/>
+<text x="700" y="220" font-size="26" fill="#20394e" font-weight="700">5V DC 모터</text>
+<text x="700" y="250" font-size="21" fill="#20394e" font-weight="400">선 1</text>
+<text x="700" y="370" font-size="21" fill="#20394e" font-weight="400">선 2</text>
+<circle cx="825" cy="300" r="37" fill="#d1dce5" stroke="#748b9c" stroke-width="3"/>
+<text x="800" y="310" font-size="26" fill="#20394e" font-weight="700">DC</text>
+<g id="direct-plus" data-from="POWER.5V_1" data-to="MOTOR.1"><title>POWER.5V_1 → MOTOR.1</title><path d="M300 240 L680 240" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="300" cy="240" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="680" cy="240" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<g id="direct-minus" data-from="POWER.GND_1" data-to="MOTOR.2"><title>POWER.GND_1 → MOTOR.2</title><path d="M300 360 L680 360" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="300" cy="360" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="680" cy="360" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="493" font-size="21" fill="#536c80" font-weight="400">안 돌면 전원&#183;접촉&#183;모터부터 확인합니다. 아직 드라이버 고장 판정은 못 합니다.</text>
+<rect x="20" y="535" width="940" height="52" rx="16" fill="#e8f4ed" stroke="#a6cdb6" stroke-width="2"/>
+<text x="40" y="569" font-size="22" fill="#215c3b" font-weight="700">기대 결과: 모터 회전 → 즉시 전원 OFF → 2단계로</text>
+</g>
+<g id="stop" transform="translate(1060 285)">
+<rect x="0" y="0" width="980" height="610" rx="16" fill="#fff" stroke="#c5d2dd" stroke-width="2"/>
+<text x="25" y="45" font-size="28" fill="#20394e" font-weight="700">2  드라이버 정지 입력 확인</text>
+<text x="25" y="85" font-size="20" fill="#536c80" font-weight="400">STBY만 5V, AIN1&#183;AIN2&#183;BIN1&#183;BIN2는 모두 GND에 연결합니다.</text>
+<rect x="20" y="130" width="240" height="350" rx="16" fill="#fff7ec" stroke="#d9b675" stroke-width="2"/>
+<rect x="450" y="130" width="260" height="350" rx="16" fill="#284c65" stroke="#284c65" stroke-width="2"/>
+<rect x="810" y="230" width="145" height="220" rx="16" fill="#e7edf2" stroke="#c5d2dd" stroke-width="2"/>
+<text x="40" y="160" font-size="24" fill="#20394e" font-weight="700">전원 모듈</text>
+<text x="470" y="160" font-size="24" fill="#fff" font-weight="700">DRV8833</text>
+<text x="827" y="264" font-size="22" fill="#20394e" font-weight="700">5V 모터</text>
+<circle cx="885" cy="320" r="33" fill="#d1dce5" stroke="#748b9c" stroke-width="3"/>
+<text x="862" y="329" font-size="24" fill="#20394e" font-weight="700">DC</text>
+<text x="40" y="188" font-size="22" fill="#c42f40" font-weight="700">출력 1 &#183; 5V</text>
+<text x="470" y="188" font-size="22" fill="#fff" font-weight="700">VM</text>
+<g id="stop-VM" data-from="POWER.5V_1" data-to="DRV.VM"><title>POWER.5V_1 → DRV.VM</title><path d="M260 180 L450 180" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="180" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="180" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="228" font-size="22" fill="#20394e" font-weight="700">출력 1 &#183; GND</text>
+<text x="470" y="228" font-size="22" fill="#fff" font-weight="700">GND</text>
+<g id="stop-GND" data-from="POWER.GND_1" data-to="DRV.GND"><title>POWER.GND_1 → DRV.GND</title><path d="M260 220 L450 220" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="220" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="220" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="268" font-size="22" fill="#c42f40" font-weight="700">출력 2 &#183; 5V</text>
+<text x="470" y="268" font-size="22" fill="#fff" font-weight="700">STBY</text>
+<g id="stop-STBY" data-from="POWER.5V_2" data-to="DRV.STBY"><title>POWER.5V_2 → DRV.STBY</title><path d="M260 260 L450 260" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="260" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="260" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="308" font-size="22" fill="#20394e" font-weight="700">출력 2 &#183; GND</text>
+<text x="470" y="308" font-size="22" fill="#fff" font-weight="700">AIN1</text>
+<g id="stop-AIN1" data-from="POWER.GND_2" data-to="DRV.AIN1"><title>POWER.GND_2 → DRV.AIN1</title><path d="M260 300 L450 300" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="300" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="300" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="348" font-size="22" fill="#20394e" font-weight="700">출력 3 &#183; GND</text>
+<text x="470" y="348" font-size="22" fill="#fff" font-weight="700">AIN2</text>
+<g id="stop-AIN2" data-from="POWER.GND_3" data-to="DRV.AIN2"><title>POWER.GND_3 → DRV.AIN2</title><path d="M260 340 L450 340" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="340" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="340" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="388" font-size="22" fill="#20394e" font-weight="700">출력 4 &#183; GND</text>
+<text x="470" y="388" font-size="22" fill="#fff" font-weight="700">BIN1</text>
+<g id="stop-BIN1" data-from="POWER.GND_4" data-to="DRV.BIN1"><title>POWER.GND_4 → DRV.BIN1</title><path d="M260 380 L450 380" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="380" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="380" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="428" font-size="22" fill="#20394e" font-weight="700">출력 5 &#183; GND</text>
+<text x="470" y="428" font-size="22" fill="#fff" font-weight="700">BIN2</text>
+<g id="stop-BIN2" data-from="POWER.GND_5" data-to="DRV.BIN2"><title>POWER.GND_5 → DRV.BIN2</title><path d="M260 420 L450 420" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="420" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="420" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="652" y="288" font-size="22" fill="#fff" font-weight="700">AO1</text>
+<text x="652" y="368" font-size="22" fill="#fff" font-weight="700">AO2</text>
+<g id="stop-out1" data-from="DRV.AO1" data-to="MOTOR.1"><title>DRV.AO1 → MOTOR.1</title><path d="M710 280 L810 280" fill="none" stroke="#b86a0d" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="710" cy="280" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="810" cy="280" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<g id="stop-out2" data-from="DRV.AO2" data-to="MOTOR.2"><title>DRV.AO2 → MOTOR.2</title><path d="M710 360 L810 360" fill="none" stroke="#b86a0d" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="710" cy="360" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="810" cy="360" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="475" y="463" font-size="16" fill="#c7d9e6" font-weight="400">NC / 반대 채널 출력 비움</text>
+<text x="30" y="516" font-size="20" fill="#536c80" font-weight="400">모든 선은 각각 별도 단자에 연결합니다. 핀 위치는 개념 배치이며 실물 글씨로 확인합니다.</text>
+<rect x="20" y="535" width="940" height="52" rx="16" fill="#e8f4ed" stroke="#a6cdb6" stroke-width="2"/>
+<text x="40" y="569" font-size="22" fill="#215c3b" font-weight="700">기대 결과: 모터 정지 (입력 0 / 0 → 출력 Hi-Z) → 전원 OFF</text>
+</g>
+<g id="channel-a" transform="translate(40 935)">
+<rect x="0" y="0" width="980" height="610" rx="16" fill="#fff" stroke="#c5d2dd" stroke-width="2"/>
+<text x="25" y="45" font-size="28" fill="#20394e" font-weight="700">3  A채널 고정 HIGH로 구동</text>
+<text x="25" y="85" font-size="20" fill="#536c80" font-weight="400">STBY와 AIN1을 5V로 연결합니다. AIN2&#183;BIN1&#183;BIN2는 GND입니다.</text>
+<rect x="20" y="130" width="240" height="350" rx="16" fill="#fff7ec" stroke="#d9b675" stroke-width="2"/>
+<rect x="450" y="130" width="260" height="350" rx="16" fill="#284c65" stroke="#284c65" stroke-width="2"/>
+<rect x="810" y="230" width="145" height="220" rx="16" fill="#e7edf2" stroke="#c5d2dd" stroke-width="2"/>
+<text x="40" y="160" font-size="24" fill="#20394e" font-weight="700">전원 모듈</text>
+<text x="470" y="160" font-size="24" fill="#fff" font-weight="700">DRV8833</text>
+<text x="827" y="264" font-size="22" fill="#20394e" font-weight="700">5V 모터</text>
+<circle cx="885" cy="320" r="33" fill="#d1dce5" stroke="#748b9c" stroke-width="3"/>
+<text x="862" y="329" font-size="24" fill="#20394e" font-weight="700">DC</text>
+<text x="40" y="188" font-size="22" fill="#c42f40" font-weight="700">출력 1 &#183; 5V</text>
+<text x="470" y="188" font-size="22" fill="#fff" font-weight="700">VM</text>
+<g id="channel-a-VM" data-from="POWER.5V_1" data-to="DRV.VM"><title>POWER.5V_1 → DRV.VM</title><path d="M260 180 L450 180" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="180" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="180" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="228" font-size="22" fill="#20394e" font-weight="700">출력 1 &#183; GND</text>
+<text x="470" y="228" font-size="22" fill="#fff" font-weight="700">GND</text>
+<g id="channel-a-GND" data-from="POWER.GND_1" data-to="DRV.GND"><title>POWER.GND_1 → DRV.GND</title><path d="M260 220 L450 220" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="220" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="220" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="268" font-size="22" fill="#c42f40" font-weight="700">출력 2 &#183; 5V</text>
+<text x="470" y="268" font-size="22" fill="#fff" font-weight="700">STBY</text>
+<g id="channel-a-STBY" data-from="POWER.5V_2" data-to="DRV.STBY"><title>POWER.5V_2 → DRV.STBY</title><path d="M260 260 L450 260" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="260" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="260" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="308" font-size="22" fill="#c42f40" font-weight="700">출력 3 &#183; 5V</text>
+<text x="470" y="308" font-size="22" fill="#fff" font-weight="700">AIN1</text>
+<g id="channel-a-AIN1" data-from="POWER.5V_3" data-to="DRV.AIN1"><title>POWER.5V_3 → DRV.AIN1</title><path d="M260 300 L450 300" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="300" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="300" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="348" font-size="22" fill="#20394e" font-weight="700">출력 3 &#183; GND</text>
+<text x="470" y="348" font-size="22" fill="#fff" font-weight="700">AIN2</text>
+<g id="channel-a-AIN2" data-from="POWER.GND_3" data-to="DRV.AIN2"><title>POWER.GND_3 → DRV.AIN2</title><path d="M260 340 L450 340" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="340" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="340" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="388" font-size="22" fill="#20394e" font-weight="700">출력 4 &#183; GND</text>
+<text x="470" y="388" font-size="22" fill="#fff" font-weight="700">BIN1</text>
+<g id="channel-a-BIN1" data-from="POWER.GND_4" data-to="DRV.BIN1"><title>POWER.GND_4 → DRV.BIN1</title><path d="M260 380 L450 380" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="380" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="380" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="428" font-size="22" fill="#20394e" font-weight="700">출력 5 &#183; GND</text>
+<text x="470" y="428" font-size="22" fill="#fff" font-weight="700">BIN2</text>
+<g id="channel-a-BIN2" data-from="POWER.GND_5" data-to="DRV.BIN2"><title>POWER.GND_5 → DRV.BIN2</title><path d="M260 420 L450 420" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="420" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="420" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="652" y="288" font-size="22" fill="#fff" font-weight="700">AO1</text>
+<text x="652" y="368" font-size="22" fill="#fff" font-weight="700">AO2</text>
+<g id="channel-a-out1" data-from="DRV.AO1" data-to="MOTOR.1"><title>DRV.AO1 → MOTOR.1</title><path d="M710 280 L810 280" fill="none" stroke="#b86a0d" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="710" cy="280" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="810" cy="280" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<g id="channel-a-out2" data-from="DRV.AO2" data-to="MOTOR.2"><title>DRV.AO2 → MOTOR.2</title><path d="M710 360 L810 360" fill="none" stroke="#b86a0d" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="710" cy="360" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="810" cy="360" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="475" y="463" font-size="16" fill="#c7d9e6" font-weight="400">NC / 반대 채널 출력 비움</text>
+<text x="30" y="516" font-size="20" fill="#536c80" font-weight="400">모든 선은 각각 별도 단자에 연결합니다. 핀 위치는 개념 배치이며 실물 글씨로 확인합니다.</text>
+<rect x="20" y="535" width="940" height="52" rx="16" fill="#e8f4ed" stroke="#a6cdb6" stroke-width="2"/>
+<text x="40" y="569" font-size="22" fill="#215c3b" font-weight="700">기대 결과: 모터 회전 (PWM 없는 최대 출력) → 1초 이내 OFF</text>
+</g>
+<g id="channel-b" transform="translate(1060 935)">
+<rect x="0" y="0" width="980" height="610" rx="16" fill="#fff" stroke="#c5d2dd" stroke-width="2"/>
+<text x="25" y="45" font-size="28" fill="#20394e" font-weight="700">4  같은 모터로 B채널 비교</text>
+<text x="25" y="85" font-size="20" fill="#536c80" font-weight="400">AIN1을 GND로, BIN1을 5V로 옮기고 모터는 BO1&#183;BO2로 옮깁니다.</text>
+<rect x="20" y="130" width="240" height="350" rx="16" fill="#fff7ec" stroke="#d9b675" stroke-width="2"/>
+<rect x="450" y="130" width="260" height="350" rx="16" fill="#284c65" stroke="#284c65" stroke-width="2"/>
+<rect x="810" y="230" width="145" height="220" rx="16" fill="#e7edf2" stroke="#c5d2dd" stroke-width="2"/>
+<text x="40" y="160" font-size="24" fill="#20394e" font-weight="700">전원 모듈</text>
+<text x="470" y="160" font-size="24" fill="#fff" font-weight="700">DRV8833</text>
+<text x="827" y="264" font-size="22" fill="#20394e" font-weight="700">5V 모터</text>
+<circle cx="885" cy="320" r="33" fill="#d1dce5" stroke="#748b9c" stroke-width="3"/>
+<text x="862" y="329" font-size="24" fill="#20394e" font-weight="700">DC</text>
+<text x="40" y="188" font-size="22" fill="#c42f40" font-weight="700">출력 1 &#183; 5V</text>
+<text x="470" y="188" font-size="22" fill="#fff" font-weight="700">VM</text>
+<g id="channel-b-VM" data-from="POWER.5V_1" data-to="DRV.VM"><title>POWER.5V_1 → DRV.VM</title><path d="M260 180 L450 180" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="180" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="180" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="228" font-size="22" fill="#20394e" font-weight="700">출력 1 &#183; GND</text>
+<text x="470" y="228" font-size="22" fill="#fff" font-weight="700">GND</text>
+<g id="channel-b-GND" data-from="POWER.GND_1" data-to="DRV.GND"><title>POWER.GND_1 → DRV.GND</title><path d="M260 220 L450 220" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="220" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="220" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="268" font-size="22" fill="#c42f40" font-weight="700">출력 2 &#183; 5V</text>
+<text x="470" y="268" font-size="22" fill="#fff" font-weight="700">STBY</text>
+<g id="channel-b-STBY" data-from="POWER.5V_2" data-to="DRV.STBY"><title>POWER.5V_2 → DRV.STBY</title><path d="M260 260 L450 260" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="260" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="260" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="308" font-size="22" fill="#20394e" font-weight="700">출력 2 &#183; GND</text>
+<text x="470" y="308" font-size="22" fill="#fff" font-weight="700">AIN1</text>
+<g id="channel-b-AIN1" data-from="POWER.GND_2" data-to="DRV.AIN1"><title>POWER.GND_2 → DRV.AIN1</title><path d="M260 300 L450 300" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="300" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="300" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="348" font-size="22" fill="#20394e" font-weight="700">출력 3 &#183; GND</text>
+<text x="470" y="348" font-size="22" fill="#fff" font-weight="700">AIN2</text>
+<g id="channel-b-AIN2" data-from="POWER.GND_3" data-to="DRV.AIN2"><title>POWER.GND_3 → DRV.AIN2</title><path d="M260 340 L450 340" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="340" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="340" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="388" font-size="22" fill="#c42f40" font-weight="700">출력 3 &#183; 5V</text>
+<text x="470" y="388" font-size="22" fill="#fff" font-weight="700">BIN1</text>
+<g id="channel-b-BIN1" data-from="POWER.5V_3" data-to="DRV.BIN1"><title>POWER.5V_3 → DRV.BIN1</title><path d="M260 380 L450 380" fill="none" stroke="#d43748" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="380" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="380" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="40" y="428" font-size="22" fill="#20394e" font-weight="700">출력 5 &#183; GND</text>
+<text x="470" y="428" font-size="22" fill="#fff" font-weight="700">BIN2</text>
+<g id="channel-b-BIN2" data-from="POWER.GND_5" data-to="DRV.BIN2"><title>POWER.GND_5 → DRV.BIN2</title><path d="M260 420 L450 420" fill="none" stroke="#354351" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="260" cy="420" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="450" cy="420" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="652" y="288" font-size="22" fill="#fff" font-weight="700">BO1</text>
+<text x="652" y="368" font-size="22" fill="#fff" font-weight="700">BO2</text>
+<g id="channel-b-out1" data-from="DRV.BO1" data-to="MOTOR.1"><title>DRV.BO1 → MOTOR.1</title><path d="M710 280 L810 280" fill="none" stroke="#b86a0d" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="710" cy="280" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="810" cy="280" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<g id="channel-b-out2" data-from="DRV.BO2" data-to="MOTOR.2"><title>DRV.BO2 → MOTOR.2</title><path d="M710 360 L810 360" fill="none" stroke="#b86a0d" stroke-width="5" stroke-linecap="round"/></g>
+<circle cx="710" cy="360" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<circle cx="810" cy="360" r="6" fill="#f6ca67" stroke="#947437" stroke-width="2"/>
+<text x="475" y="463" font-size="16" fill="#c7d9e6" font-weight="400">NC / 반대 채널 출력 비움</text>
+<text x="30" y="516" font-size="20" fill="#536c80" font-weight="400">모든 선은 각각 별도 단자에 연결합니다. 핀 위치는 개념 배치이며 실물 글씨로 확인합니다.</text>
+<rect x="20" y="535" width="940" height="52" rx="16" fill="#e8f4ed" stroke="#a6cdb6" stroke-width="2"/>
+<text x="40" y="569" font-size="22" fill="#215c3b" font-weight="700">기대 결과: B채널에서도 모터 회전 → 1초 이내 OFF</text>
+</g>
+<rect x="40" y="1580" width="2000" height="355" rx="16" fill="#fff" stroke="#c5d2dd" stroke-width="2"/>
+<text x="65" y="1620" font-size="29" fill="#20394e" font-weight="700">결과를 이렇게 읽으세요</text>
+<text x="70" y="1670" font-size="23" fill="#20394e" font-weight="700">1단계부터 안 돈다</text>
+<text x="420" y="1670" font-size="21" fill="#536c80" font-weight="400">전원 출력&#183;선 접촉&#183;모터를 먼저 점검. 드라이버가 빠진 시험이므로 드라이버 탓으로 확정하지 않음.</text>
+<text x="70" y="1714" font-size="23" fill="#20394e" font-weight="700">1&#183;3&#183;4단계 모두 돈다</text>
+<text x="420" y="1714" font-size="21" fill="#536c80" font-weight="400">A/B채널은 현재 모터를 한 방향으로 구동할 수 있음. 이후 ESP32 신호&#183;핀&#183;공통 GND를 다시 확인.</text>
+<text x="70" y="1758" font-size="23" fill="#20394e" font-weight="700">1&#183;4는 돌고 3만 안 돈다</text>
+<text x="420" y="1758" font-size="21" fill="#536c80" font-weight="400">A채널 배선&#183;접촉&#183;보호동작&#183;채널 고장 가능성을 좁혀 볼 수 있음. AIN1/AIN2와 AO1/AO2를 재확인.</text>
+<text x="70" y="1802" font-size="23" fill="#20394e" font-weight="700">1&#183;3은 돌고 4만 안 돈다</text>
+<text x="420" y="1802" font-size="21" fill="#536c80" font-weight="400">B채널 배선&#183;접촉&#183;보호동작&#183;채널 고장 가능성. BIN1/BIN2와 BO1/BO2를 재확인.</text>
+<text x="70" y="1846" font-size="23" fill="#20394e" font-weight="700">1은 돌고 3&#183;4는 안 돈다</text>
+<text x="420" y="1846" font-size="21" fill="#536c80" font-weight="400">VM/GND&#183;STBY 핀 식별&#183;배선&#183;전원 용량&#183;보호동작&#183;드라이버 고장 중 하나. 측정/교체 비교로 확정 필요.</text>
+<text x="70" y="1890" font-size="23" fill="#20394e" font-weight="700">2단계에서 모터가 돈다</text>
+<text x="420" y="1890" font-size="21" fill="#536c80" font-weight="400">즉시 전원 OFF. 핀 오인&#183;잘못된 배선&#183;드라이버 이상 여부부터 확인.</text>
+<rect x="40" y="1960" width="2000" height="140" rx="16" fill="#e8f0f8" stroke="#aac3dc" stroke-width="2"/>
+<text x="65" y="2000" font-size="27" fill="#20394e" font-weight="700">이 시험의 전제와 한계</text>
+<text x="65" y="2036" font-size="23" fill="#20394e" font-weight="400">실제 DRV8833 완성 모듈이며 STBY가 nSLEEP에 연결된 경우를 전제로 합니다. 전원 모듈의 모든 GND는 내부 공통입니다.</text>
+<text x="65" y="2072" font-size="22" fill="#20394e" font-weight="400">입력에 5V를 고정하는 시험이므로 ESP32 선은 전부 제거합니다. 모터 시동전류와 발열&#183;부하 조건까지 정상임을 보증하지는 않습니다.</text>
+<a href="https://www.ti.com/lit/ds/symlink/drv8833.pdf">
+<text x="45" y="2140" font-size="20" fill="#536c80" font-weight="400">검증 기준: TI DRV8833 데이터시트 p.5 입력 전압 범위 / p.9 H-브리지 진리표 / p.11 nSLEEP 동작</text>
+</a></svg>
