@@ -1,0 +1,3 @@
+.tools/
+build/
+wifi_setup/secrets.h

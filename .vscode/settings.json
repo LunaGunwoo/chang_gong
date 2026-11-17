@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "*.ino": "cpp"
+  },
+  "arduino.useArduinoCli": true,
+  "arduino.path": "C:/Users/moong/esp32-wifi-setup/.tools",
+  "arduino.commandPath": "arduino-cli.exe",
+  "arduino.additionalUrls": [
+    "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+  ],
+  "arduino.disableIntelliSenseAutoGen": true,
+  "cmake.configureOnOpen": false
+}

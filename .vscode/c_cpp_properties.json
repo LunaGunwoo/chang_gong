@@ -1,0 +1,49 @@
+{
+  "env": {
+    "esp32Core": "${env:LOCALAPPDATA}/Arduino15/packages/esp32/hardware/esp32/3.3.12",
+    "esp32Sdk": "${env:LOCALAPPDATA}/Arduino15/packages/esp32/tools/esp32-libs/3.3.12",
+    "esp32Compiler": "${env:LOCALAPPDATA}/Arduino15/packages/esp32/tools/esp-x32/2601/bin/xtensa-esp32-elf-g++.exe"
+  },
+  "configurations": [
+    {
+      "name": "ESP32 Dev Module",
+      "compilerPath": "${esp32Compiler}",
+      "compilerArgs": [
+        "@${esp32Sdk}/flags/defines",
+        "-iprefix",
+        "${esp32Sdk}/include/",
+        "@${esp32Sdk}/flags/includes"
+      ],
+      "intelliSenseMode": "windows-gcc-x86",
+      "cStandard": "gnu17",
+      "cppStandard": "gnu++20",
+      "includePath": [
+        "${workspaceFolder}/wifi_setup",
+        "${workspaceFolder}/servo_ping",
+        "${esp32Core}/cores/esp32",
+        "${esp32Core}/variants/esp32",
+        "${esp32Core}/libraries/WiFi/src",
+        "${esp32Core}/libraries/Network/src",
+        "${esp32Sdk}/qio_qspi/include"
+      ],
+      "defines": [
+        "F_CPU=240000000L",
+        "ARDUINO=10607",
+        "ARDUINO_ESP32_DEV",
+        "ARDUINO_ARCH_ESP32",
+        "ARDUINO_BOARD=\"ESP32_DEV\"",
+        "ARDUINO_VARIANT=\"esp32\"",
+        "ARDUINO_PARTITION_default",
+        "ESP32=ESP32",
+        "CORE_DEBUG_LEVEL=0",
+        "ARDUINO_RUNNING_CORE=1",
+        "ARDUINO_EVENT_RUNNING_CORE=1",
+        "ARDUINO_USB_CDC_ON_BOOT=0"
+      ],
+      "forcedInclude": [
+        "${esp32Core}/cores/esp32/Arduino.h"
+      ]
+    }
+  ],
+  "version": 4
+}
